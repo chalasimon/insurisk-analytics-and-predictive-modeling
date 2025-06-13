@@ -1,0 +1,21 @@
+# Ignore Python cache directories
+__pycache__/
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+# Ignore Python bytecode files
+*.pyc
+# Ignore virtual environment directories
+.venv/
+# Ignore log files
+*.log
+# Ignore coverage reports
+.coverage
+# Ignore data files
+data/
+*.csv
+*.json
+# Ignore ide configuration files
+*.parquet
+.vscode/
+# Ignore environment files
+setup_project.py
