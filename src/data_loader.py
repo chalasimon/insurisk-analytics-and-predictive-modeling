@@ -17,4 +17,7 @@ class DataLoader:
             self.data = pd.read_csv(file_path, sep="|")
         else:
             self.data = pd.read_csv(file_path)
+        #convert 'TransactionMonth' column to datetime if it exists
+        if 'TransactionMonth' in self.data.columns:
+            self.data['TransactionMonth'] = pd.to_datetime(self.data['TransactionMonth'], errors='coerce')
         return self.data
