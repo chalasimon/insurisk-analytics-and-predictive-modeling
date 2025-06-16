@@ -178,6 +178,7 @@ class Visualization:
 
         # Plotting the vehicle models by average claim amount
         plt.figure(figsize=(12, 8))
+        sns.set_style("whitegrid")
         sns.barplot(x='TotalClaims', y='Model', data=avg_claim_by_model, palette='Reds_d')
         plt.title('Vehicle Models by Average Claim Amount')
         plt.xlabel('Average Claim Amount')
@@ -186,6 +187,7 @@ class Visualization:
         plt.show()
     def cover_category_distribution(self,col1,col2):
             plt.figure(figsize=(14, 8))
+            sns.set_style("whitegrid")
             sns.countplot(data=self.data, y=col1, hue=col2, palette='tab10', order=self.data[col1].value_counts().index)
             plt.title(f'Distribution of {col2} by {col1}')
             plt.xlabel('Count')
@@ -193,4 +195,14 @@ class Visualization:
             plt.legend(title=col2, bbox_to_anchor=(1.05, 1), loc='upper left')
             plt.tight_layout()
             plt.show()
+    def plot_outliers(self):
+        numerical_cols = ['TotalPremium', 'TotalClaims', 'CalculatedPremiumPerTerm', 'SumInsured']
+        plt.figure(figsize=(12, 8))
+        sns.set_style("whitegrid")
+        for i, col in enumerate(numerical_cols):
+            plt.subplot(2, 2, i + 1)
+            sns.boxplot(x=self.data[col], palette='viridis', orient='h')
+            plt.title(f'Distribution of {col} with Outliers', fontsize=12) 
+        plt.tight_layout(rect=[0, 0, 1, 0.98])
+        plt.show()
   
