@@ -1,0 +1,4 @@
+[core]
+    remote = local-storage
+['remote "local-storage"']
+    url = D:/Research & Project/10academy/week 3/data/dvc-storage
