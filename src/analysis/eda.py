@@ -29,4 +29,21 @@ class EDA:
     def unique_values(self):
         unique_values = {col: self.df[col].nunique() for col in self.df.columns}
         return unique_values
-    
+    # calculate loss ratio (TotalClaims / TotalPremium)
+    def calculate_loss_ratios(self):
+        self.df['LossRatio'] = self.df.apply(lambda row: row['TotalClaims'] / row['TotalPremium'] if row['TotalPremium'] > 0 else np.nan, axis=1)
+        return self.df['LossRatio']
+
+    def calculate_overall_loss_ratio(self):
+        """
+        Calculate the overall loss ratio for the dataset.
+        """
+        total_claims = self.df['TotalClaims'].sum()
+        total_premium = self.df['TotalPremium'].sum()
+
+        if total_premium > 0:
+            return total_claims / total_premium
+        else:
+            return np.nan
+        
+
