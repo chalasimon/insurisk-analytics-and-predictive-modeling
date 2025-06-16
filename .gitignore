@@ -12,7 +12,7 @@ __pycache__/
 .coverage
 # Ignore data files
 data/
-*.csv
+
 *.json
 # Ignore ide configuration files
 *.parquet
