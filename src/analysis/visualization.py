@@ -165,5 +165,32 @@ class Visualization:
         else:
             print("\n--- Skipping Temporal Trend Analysis: 'TransactionMonth' is not in datetime format or not found. ---")
             return None
+    def vehicle_model_analysis(self):
+        # Calculate average claim for each Model, only considering policies with claims.
+        self.claims_df = self.data[self.data['TotalClaims'] > 0].copy()
+        avg_claim_by_model = self.claims_df.groupby('Model')['TotalClaims'].mean().sort_values(ascending=False).reset_index()
 
+        print("\n--- Top 10 Vehicle Models by Average Claim Amount (for policies with claims) ---")
+        print(avg_claim_by_model.head(10))
+
+        print("\n--- Bottom 10 Vehicle Models by Average Claim Amount (for policies with claims) ---")
+        print(avg_claim_by_model.tail(10))
+
+        # Plotting the vehicle models by average claim amount
+        plt.figure(figsize=(12, 8))
+        sns.barplot(x='TotalClaims', y='Model', data=avg_claim_by_model, palette='Reds_d')
+        plt.title('Vehicle Models by Average Claim Amount')
+        plt.xlabel('Average Claim Amount')
+        plt.ylabel('Vehicle Model')
+        plt.tight_layout()
+        plt.show()
+    def cover_category_distribution(self,col1,col2):
+            plt.figure(figsize=(14, 8))
+            sns.countplot(data=self.data, y=col1, hue=col2, palette='tab10', order=self.data[col1].value_counts().index)
+            plt.title(f'Distribution of {col2} by {col1}')
+            plt.xlabel('Count')
+            plt.ylabel(col1)
+            plt.legend(title=col2, bbox_to_anchor=(1.05, 1), loc='upper left')
+            plt.tight_layout()
+            plt.show()
   
