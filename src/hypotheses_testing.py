@@ -94,6 +94,29 @@ class HypothesisTesting:
             else:
                 print(f"  --> Fail to reject H₀ for Claim Frequency. Claim frequency is independent of zip code (p={p_value_chi2:.4f}).")
         return results
+    # no significant margin (profit) difference between zip codes 
+    def test_zipcode_margin(self, alpha=0.05):
+        print("\n--- Hypothesis: No significant margin differences across Zip Codes ---")
+        results = {}
+
+        # 1. Test Net Premium (Numerical)
+        zipcode_net_premiums = self._get_groups_data('PostalCode', 'NetPremium')
+        
+        if len(zipcode_net_premiums) > 1:
+            # Use Kruskal-Wallis as NetPremium is often not normally distributed
+            kruskal_stat, p_value_kruskal = stats.kruskal(*zipcode_net_premiums)
+            results['NetPremium_Kruskal'] = {'statistic': kruskal_stat, 'p_value': p_value_kruskal}
+            print(f"Net Premium (Kruskal-Wallis): Stat={kruskal_stat:.4f}, P={p_value_kruskal:.4f}")
+
+            if p_value_kruskal < alpha:
+                print(f"  --> Reject H₀ for Net Premium. Significant differences exist across zip codes (p={p_value_kruskal:.4f}).")
+                print("  --> (Further post-hoc analysis needed to identify specific differing zip codes).")
+            else:
+                print(f"  --> Fail to reject H₀ for Net Premium. No significant differences across zip codes (p={p_value_kruskal:.4f}).")
+        else:
+            print("  --> Not enough data to test Net Premium across zip codes.")
+            
+        return results
     def test_gender_risk(self, alpha=0.05):
         print("\n--- Hypothesis: No significant risk differences between Women and Men ---")
         results = {}
