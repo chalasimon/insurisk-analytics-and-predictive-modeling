@@ -15,3 +15,10 @@ Jupyter notebooks in the `notebooks/` directory provide a comprehensive explorat
    - Data Comparison: Compare different features to identify patterns and insights.
    - Outlier Detection: Used box plots to identify outliers in numerical features.
    - Visualization: Use seaborn and matplotlib to create visualizations for better understanding of the data.
+# Task 2: Hypothesis Testing
+The `a_b_hypothesis_testing.ipynb` notebook contains the hypothesis testing analysis, including statistical tests
+and results interpretation.
+## Task Workflow
+  - ***Hypothesis Formulation:*** Define null and alternative hypotheses based on the dataset.
+  - ***Statistical Tests:*** Perform appropriate statistical tests (e.g., t-tests, chi-squared tests) to validate hypotheses.
+  - ***Results Interpretation:*** Analyze the results of the tests and draw conclusions.
