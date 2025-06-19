@@ -20,4 +20,7 @@ class DataLoader:
         #convert 'TransactionMonth' column to datetime if it exists
         if 'TransactionMonth' in self.data.columns:
             self.data['TransactionMonth'] = pd.to_datetime(self.data['TransactionMonth'], errors='coerce')
+        #convert 'VehicleIntroDate' column to datetime if it exists
+        if 'VehicleIntroDate' in self.data.columns:
+            self.data['VehicleIntroDate'] = pd.to_datetime(self.data['VehicleIntroDate'], errors='coerce')
         return self.data
