@@ -34,5 +34,3 @@ class Preprocessing:
         self.df = self.remove_duplicates()
         self.df = self.remove_outliers()
         return self.df
-    
-    
